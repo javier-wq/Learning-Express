@@ -1,27 +1,33 @@
-import express from 'express'
+const express = require("express");
 
-const app = express()
+const app = express();
 
-app.get('/products', (req, res) => {
-    res.send('lista de productos')
-})
+app.get("/", (req, res) => {
+  res.send("Hello world");
+});
 
-app.post('/products', (req, res) => {
-    res.send('Creando un producto')
-})
+app.get("/miarchivo", (req, res) => {
+  res.sendFile("./js.png", {
+    root: __dirname,
+  });
+});
 
-app.put('/products', (req, res) => {
-    res.send('Actualizando un producto')
-})
+app.get("/user", (req, res) => {
+  res.json({
+    name: "Jax",
+    lastname: "Ray",
+    age: 40,
+    points: [1, 2, 3],
+    address: {
+      city: "New York",
+      street: "Som street 123",
+    },
+  });
+});
 
-app.delete('/products', (req, res) => {
-    res.send('Eliminando un producto')
-})
+app.get("/isAlive", (req, res) => {
+  res.sendStatus(204);
+});
 
-app.patch('/products', (req, res) => {
-    res.send('Actualizando una parte del producto')
-})
-
-
-app.listen(3000)
-console.log(`Server on port ${3000}`)
+app.listen(3000);
+console.log(`Server on port ${3000}`);
