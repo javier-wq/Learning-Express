@@ -1,22 +1,27 @@
-const express = require('express')
+import express from 'express'
 
 const app = express()
 
-app.get('/', (req, res) => {
-    res.send('Hello World')
+app.get('/products', (req, res) => {
+    res.send('lista de productos')
 })
 
-app.get('/about', (req, res) => {
-    res.send('About')
+app.post('/products', (req, res) => {
+    res.send('Creando un producto')
 })
 
-app.get('/weather', (req, res) => {
-    res.send('The current wheather is nice')
+app.put('/products', (req, res) => {
+    res.send('Actualizando un producto')
 })
 
-app.use((req, res) => {
-    res.status(404).send('Not Found')
+app.delete('/products', (req, res) => {
+    res.send('Eliminando un producto')
 })
+
+app.patch('/products', (req, res) => {
+    res.send('Actualizando una parte del producto')
+})
+
 
 app.listen(3000)
 console.log(`Server on port ${3000}`)
