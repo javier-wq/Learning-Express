@@ -2,13 +2,27 @@ const express = require("express");
 
 const app = express();
 
-app.use(express.text());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.get("/hello/:user", (req, res) => {
+  res.send(`Hello ${req.params.user}`);
+});
 
-app.post("/user", (req, res) => {
-  console.log(req.body);
-  res.send("Nuevo usuario creado");
+app.get("/add/:x/:y", (req, res) => {
+  const { x, y } = req.params;
+  res.send(`Result: ${parseInt(x) + parseInt(y)}`);
+});
+
+app.get("/user/:username/photo", (req, res) => {
+  if (req.params.username === "jax") {
+    return res.sendFile("./js.png", {
+      root: __dirname,
+    });
+  }
+
+  res.send("El usuario no tiene permisos");
+});
+
+app.get("/name/:nombre/age/:age", (req, res) => {
+  res.send(`El usuario ${req.params.nombre} tiene ${req.params.age} años`);
 });
 
 app.listen(3000);
