@@ -2,7 +2,15 @@ const express = require("express");
 
 const app = express();
 
+app.get("/search", (req, res) => {
+  if (req.query.q != "js") {
+    res.send("Pagina Normal");
+  }
+  res.send("Lista de libros de javascript");
+});
+
 app.get("/hello/:user", (req, res) => {
+  console.log(req.query.x);
   res.send(`Hello ${req.params.user}`);
 });
 
