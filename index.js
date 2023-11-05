@@ -2,6 +2,10 @@ const express = require("express");
 
 const app = express();
 
+app.all("/info", (req, res) => {
+  res.send("Server info");
+});
+
 app.get("/search", (req, res) => {
   if (req.query.q != "js") {
     res.send("Pagina Normal");
