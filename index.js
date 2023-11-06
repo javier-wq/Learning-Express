@@ -12,6 +12,11 @@ app.set("port", 3000);
 app.use(express.json());
 app.use(morgan("dev"));
 
+app.use("/public", express.static("./public"));
+
+app.get("/note.txt", (req, res) => {
+  res.send("Este no es un archivo");
+});
 // Routes
 app.get("/Dashboard", (req, res) => {
   res.send("Dashboard Page");
