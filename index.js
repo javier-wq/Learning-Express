@@ -5,6 +5,9 @@ const app = express();
 
 app.use(morgan("dev"));
 
+app.set("appName", "Express Course");
+app.set("port", 3000);
+
 app.use((req, res, next) => {
   if (req.query.login != "javiermonge247@gmail.com") {
     res.send("No autorizado");
@@ -20,5 +23,5 @@ app.get("/profile", (req, res) => {
   res.send("Profile page");
 });
 
-app.listen(3000);
-console.log(`Server on port ${3000}`);
+app.listen(app.get("port"));
+console.log(`Server ${app.get("appName")} on port ${app.get("port")}`);
