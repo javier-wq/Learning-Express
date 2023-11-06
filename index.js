@@ -1,40 +1,23 @@
 const express = require("express");
+const morgan = require("morgan");
 
 const app = express();
 
-app.all("/info", (req, res) => {
-  res.send("Server info");
-});
+app.use(morgan("dev"));
 
-app.get("/search", (req, res) => {
-  if (req.query.q != "js") {
-    res.send("Pagina Normal");
+app.use((req, res, next) => {
+  if (req.query.login != "javiermonge247@gmail.com") {
+    res.send("No autorizado");
   }
-  res.send("Lista de libros de javascript");
+  next();
 });
 
-app.get("/hello/:user", (req, res) => {
-  console.log(req.query.x);
-  res.send(`Hello ${req.params.user}`);
+app.get("/dashboard", (req, res) => {
+  res.send("Dashboard Page");
 });
 
-app.get("/add/:x/:y", (req, res) => {
-  const { x, y } = req.params;
-  res.send(`Result: ${parseInt(x) + parseInt(y)}`);
-});
-
-app.get("/user/:username/photo", (req, res) => {
-  if (req.params.username === "jax") {
-    return res.sendFile("./js.png", {
-      root: __dirname,
-    });
-  }
-
-  res.send("El usuario no tiene permisos");
-});
-
-app.get("/name/:nombre/age/:age", (req, res) => {
-  res.send(`El usuario ${req.params.nombre} tiene ${req.params.age} años`);
+app.get("/profile", (req, res) => {
+  res.send("Profile page");
 });
 
 app.listen(3000);
