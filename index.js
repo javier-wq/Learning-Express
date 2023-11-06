@@ -3,19 +3,17 @@ const morgan = require("morgan");
 
 const app = express();
 
-app.use(morgan("dev"));
-
+// Settings
+app.set("case sensitive routing", true);
 app.set("appName", "Express Course");
 app.set("port", 3000);
 
-app.use((req, res, next) => {
-  if (req.query.login != "javiermonge247@gmail.com") {
-    res.send("No autorizado");
-  }
-  next();
-});
+// Middleware
+app.use(express.json());
+app.use(morgan("dev"));
 
-app.get("/dashboard", (req, res) => {
+// Routes
+app.get("/Dashboard", (req, res) => {
   res.send("Dashboard Page");
 });
 
